@@ -10,8 +10,13 @@ class Time
       dateFromString(time)
   end
   
+  def self.iso8601_without_time(time) #should this really be in Time?
+    cached_date_formatter("yyyy-MM-dd").
+      dateFromString(time)
+  end
+  
   def self.strptime(time)
-    iso8601(time) || iso8601_with_timezone(time)
+    iso8601(time) || iso8601_with_timezone(time) || iso8601_without_time(time)
   end
 
   private
